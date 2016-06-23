@@ -1,7 +1,7 @@
 package com.isaacspeed;
 
 /**
- * Created by IS046078 on 6/23/2016.
+ * Created by Isaac Speed on 6/23/2016.
  */
 public class DoubleRange {
     double lowerBound;

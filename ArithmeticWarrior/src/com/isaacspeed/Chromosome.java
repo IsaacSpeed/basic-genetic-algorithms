@@ -60,9 +60,7 @@ class Chromosome {
 
         double denominator = targetValue - myValue;
 
-        if (denominator == 0) return 0;
-        double answer = 1.0 / denominator;
-        return answer;
+        return 1.0 / denominator;
     }
 
     public double evaluate() {
@@ -75,8 +73,8 @@ class Chromosome {
         / = 4
          */
         int previousOperator = 0;
-        int previousValue = 0;
-        value = Integer.parseInt(genes[0].toString());;
+        int previousValue;
+        value = Integer.parseInt(genes[0].toString());
 
         for (int i = 1; i < CHROMOSOME_LENGTH; i++) {
             switch (genes[i].getCharValue()) {

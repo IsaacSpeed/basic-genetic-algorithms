@@ -3,7 +3,7 @@ package com.isaacspeed;
 import java.util.Random;
 
 /**
- * Created by IS046078 on 6/23/2016.
+ * Created by Isaac Speed on 6/23/2016.
  * A genetic algorithm class
  */
 public class GeneticAlgorithm {
@@ -42,8 +42,8 @@ public class GeneticAlgorithm {
 
             int indexOneInt = binarySearchPopulationChances(indexOne, 0, populationChances.length);
             int indexTwoInt = binarySearchPopulationChances(indexTwo, 0, populationChances.length);
-            chromosomeOne = population[indexOneInt];
-            chromosomeTwo = population[indexTwoInt];
+            if (indexOneInt != -1) chromosomeOne = population[indexOneInt];
+            if (indexTwoInt != -1) chromosomeTwo = population[indexTwoInt];
 
             if (chromosomeOne != null && chromosomeTwo != null) {
                 newChromosome = chromosomeOne.breedOne(chromosomeTwo);
@@ -51,8 +51,7 @@ public class GeneticAlgorithm {
                 if (newChromosome.isValid()) {
                     newPopulation[newPopulationSize] = newChromosome;
 
-                    if (Math.abs(newChromosome.getFitnessScore(targetValue)) < SOLUTION_THRESHOLD) {
-                        System.out.println("Found solution. " + newChromosome.evaluate() + " with " + newChromosome.getFitnessScore(targetValue));
+                    if (Math.abs(newChromosome.getFitnessScore(targetValue)) == Double.POSITIVE_INFINITY) {
                         solution = newChromosome;
                     }
 
@@ -84,6 +83,8 @@ public class GeneticAlgorithm {
         for (int i = 0; i < size; i++) {
             // make absolute
             double fitnessScore = Math.abs(population[i].getFitnessScore(targetValue));
+
+            if (fitnessScore == Double.POSITIVE_INFINITY) solution = population[i];
 
             populationChances[i] = new DoubleRange(currentValue, currentValue + fitnessScore);
             currentValue += fitnessScore;
